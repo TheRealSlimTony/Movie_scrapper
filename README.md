@@ -4,7 +4,7 @@
 Este proyecto es un scraper de películas a tiempo real que utiliza FastAPI para crear una API REST. Permite a los usuarios obtener información sobre las películas en cartelera en diferentes ubicaciones.
 
 ## Características
-- Scrapea información sobre películas en cartelera.
+- Scrapea información sobre películas en cartelera en tiempo real para Costa Rica.
 - API REST construida con FastAPI.
 - Información detallada de cada película, incluyendo horarios y formatos.
 
