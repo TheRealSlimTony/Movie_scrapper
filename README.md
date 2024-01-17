@@ -1,5 +1,4 @@
 # Movie_scrapper
-# Movie Scrapper
 
 ## Descripción
 Este proyecto es un scraper de películas a tiempo real que utiliza FastAPI para crear una API REST. Permite a los usuarios obtener información sobre las películas en cartelera en diferentes ubicaciones.
