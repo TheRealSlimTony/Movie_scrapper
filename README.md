@@ -1,23 +1,24 @@
-# Movie_scrapper
+# Movie Scrapper
+## Description
+This project is a real-time movie scraper that uses FastAPI to create a REST API. It allows users to obtain information about movies currently showing in various locations.
 
-## Descripción
-Este proyecto es un scraper de películas que utiliza FastAPI para crear una API REST. Permite a los usuarios obtener información sobre las películas en cartelera en diferentes ubicaciones.
+## Features
+- Scrapes real-time information about movies showing in Costa Rica.
+- REST API built with FastAPI.
+- Detailed information for each movie, including showtimes and formats.
 
-## Características
-- Scrapea información sobre películas en cartelera.
-- API REST construida con FastAPI.
-- Información detallada de cada película, incluyendo horarios y formatos.
-
-## Tecnologías Utilizadas
+## Technologies Used
 - Python
 - FastAPI
 - requests_html
 - asyncio
 - re (Regular Expressions)
 
-## Instalación
-Para instalar y ejecutar este proyecto, sigue estos pasos:
+## Installation
+To install and run this project, follow these steps:
 
-1. Clona el repositorio:
-2. Instala las dependencias:
+Clone the repository:
+Install the dependencies:
+Copy code
 pip install -r requirements.txt
+Feel free to make any adjustments to better suit your project's specifics.
