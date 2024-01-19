@@ -1,6 +1,14 @@
 from requests_html import AsyncHTMLSession
 import asyncio
 import re
+from bs4 import BeautifulSoup
+
+
+# https://cinepolis.co.cr/cartelera/cartago-costa-rica/
+# https://cinepolis.co.cr/cartelera/desamparados-costa-rica/
+# https://cinepolis.co.cr/cartelera/heredia-costa-rica/
+# https://cinepolis.co.cr/cartelera/lindora-costa-rica/
+# https://cinepolis.co.cr/cartelera/tres-rios-costa-rica/
 
 
 async def obtener_peliculas_por_ubicacion(ubicacion):
@@ -15,7 +23,7 @@ async def obtener_peliculas_por_ubicacion(ubicacion):
         await session.close()
 
 
-def extraer_informacion(pelicula):
+def extraer_informacion(pelicula, html):
     # Intenta extraer el título
     match_titulo = re.match(r".*?(?=(?:TP)?M?\d+|\d+ min)", pelicula)
     titulo = match_titulo.group() if match_titulo else "Título no encontrado"
@@ -31,25 +39,27 @@ def extraer_informacion(pelicula):
     # Extrae horarios SUB y DOB
     sub_horarios = re.findall(r"SUB((?:\d{2}:\d{2})+)", pelicula)
     dob_horarios = re.findall(r"DOB((?:\d{2}:\d{2})+)", pelicula)
-
+    soup = BeautifulSoup(html, "lxml")
+    url_img = [img["src"] for img in soup.find_all("img") if "src" in img.attrs]
     sub_horarios_separados = re.findall(r"\d{2}:\d{2}", "".join(sub_horarios))
     dob_horarios_separados = re.findall(r"\d{2}:\d{2}", "".join(dob_horarios))
 
-    return titulo, duracion, sub_horarios_separados, dob_horarios_separados
+    return titulo, duracion, sub_horarios_separados, dob_horarios_separados, url_img
 
 
 def imprimir_informacion_peliculas(peliculas, ubicacion):
     cartelera_info = []
     for pelicula in peliculas:
-        titulo, duracion, horarios_sub, horarios_dob = extraer_informacion(
-            pelicula.full_text
+        titulo, duracion, horarios_sub, horarios_dob, url_img = extraer_informacion(
+            pelicula.full_text, pelicula.html
         )
-        if titulo != "Título no encontrado":
+        if titulo != "Título no encontrado" and duracion != "Duración no encontrada":
             pelicula_info = {
                 "título": titulo,
                 "duración": duracion,
                 "horarios_sub": horarios_sub,
                 "horarios_dob": horarios_dob,
+                "url_img": url_img,
             }
             cartelera_info.append(pelicula_info)
 

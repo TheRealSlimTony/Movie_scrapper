@@ -7,25 +7,29 @@ from scraper import (
     obtener_peliculas_por_ubicacion,
     imprimir_informacion_peliculas,
 )
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permite todas las origines
+    allow_credentials=True,
+    allow_methods=["*"],  # Permite todos los métodos
+    allow_headers=["*"],  # Permite todos los headers
+)
 
 
 class Cartelera(BaseModel):
-    Ubicacion: Optional[str] = None
+    location: Optional[str] = None
 
 
 @app.post("/cartelera")
 async def post_cartelera(cartelera: Cartelera):
-    if cartelera.Ubicacion:
-        print(f"Ubicación proporcionada: {cartelera.Ubicacion}")
-        peliculas = await obtener_peliculas_por_ubicacion(cartelera.Ubicacion)
-        data_cartelera = imprimir_informacion_peliculas(peliculas, cartelera.Ubicacion)
-        return {
-            "La cartelera de {} es la siguiente: {}".format(
-                cartelera.Ubicacion, data_cartelera
-            )
-        }
+    if cartelera.location:
+        print(f"Ubicación proporcionada: {cartelera.location}")
+        peliculas = await obtener_peliculas_por_ubicacion(cartelera.location)
+        data_cartelera = imprimir_informacion_peliculas(peliculas, cartelera.location)
+        return data_cartelera
     else:
         print("No se proporcionó ubicación")
         return {"message": "Cartelera creada sin ubicación específica"}
