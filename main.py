@@ -6,6 +6,7 @@ from requests_html import AsyncHTMLSession
 from scraper import (
     obtener_peliculas_por_ubicacion,
     imprimir_informacion_peliculas,
+    obtener_imagenes,
 )
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -33,6 +34,13 @@ async def post_cartelera(cartelera: Cartelera):
     else:
         print("No se proporcionó ubicación")
         return {"message": "Cartelera creada sin ubicación específica"}
+
+
+@app.post("/all_movies")
+async def post_all_movies():
+    peliculas = await obtener_peliculas_por_ubicacion(ubicacion="moravia-costa-rica")
+    all_movies = obtener_imagenes(peliculas, ubicacion="moravia-costa-rica")
+    return all_movies
 
 
 if __name__ == "__main__":

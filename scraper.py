@@ -64,3 +64,17 @@ def imprimir_informacion_peliculas(peliculas, ubicacion):
             cartelera_info.append(pelicula_info)
 
     return cartelera_info
+
+
+def obtener_imagenes(peliculas, ubicacion='moravia-costa-rica"'):
+    print(f"\nCartelera para: {ubicacion}")
+    cartelera = []
+    for pelicula in peliculas:
+        titulo, duracion, horarios_sub, horarios_dob, url_img = extraer_informacion(
+            pelicula.full_text, pelicula.html
+        )
+        if titulo != "Título no encontrado" and duracion != "Duración no encontrada":
+            if titulo not in [peli["titulo"] for peli in cartelera]:
+                pelicula_disponible = {"titulo": titulo, "url_img": url_img}
+                cartelera.append(pelicula_disponible)
+    return cartelera
