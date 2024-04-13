@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense para obtener información sobre los atributos posibles.
+    // Sugerencias emergentes para las vistas previas de los atributos existentes.
+    // Para más información, visita: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: FastAPI",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "main:app",
+                "--reload",
+                "--host", "127.0.0.1",
+                "--port", "8000"
+            ],
+            "jinja": true
+        }
+    ]
+}

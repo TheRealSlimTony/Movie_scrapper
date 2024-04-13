@@ -1,0 +1,62 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Movie_Scrapper",
+    "dateExported": "2024-04-13T19:24:43.313Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "73cac6a0-511e-4f0f-8542-4f8bf4104325",
+            "colId": "5a7ffffd-8fad-438c-b218-048b6eac934a",
+            "containerId": "",
+            "name": "http://127.0.0.1:8000/cartelera/",
+            "url": "http://127.0.0.1:8000/cartelera/",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-01-17T02:04:44.498Z",
+            "modified": "2024-04-13T19:21:45.364Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"location\": \"moravia-costa-rica\",\n    \"cinema_id\": 490\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "7ab43eb8-4ea3-475b-99b6-fcd37360a185",
+            "colId": "5a7ffffd-8fad-438c-b218-048b6eac934a",
+            "containerId": "",
+            "name": "GET_DATA_FROM_CINEPOLIS",
+            "url": "https://cinepolis.co.cr/api/schedule_cinema?cinema_id=490",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-04-13T07:24:03.690Z",
+            "modified": "2024-04-13T07:24:03.690Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json, text/plain, */*"
+                },
+                {
+                    "name": "Accept-Encoding",
+                    "value": "gzip, deflate, br, zstd"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [
+                {
+                    "name": "cinema_id",
+                    "value": "490",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        }
+    ]
+}
