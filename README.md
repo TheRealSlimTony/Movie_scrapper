@@ -1,4 +1,4 @@
-# Movie Scraper
+    # Movie Scraper
 
 ## Description
 Movie Scraper is a real-time movie scraping application that utilizes FastAPI to create a REST API. It allows users to retrieve information about movies currently being shown in various locations.

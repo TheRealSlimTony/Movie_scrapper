@@ -8,7 +8,7 @@ from scraper import (
     imprimir_informacion_peliculas,
     obtener_imagenes,
 )
-from scraper_by_api_request import imprimir_informacion_peliculas, get_data_from_cinema_id
+from scraper_by_api_request import get_data_from_movies, get_data_from_cinema_id
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -30,7 +30,7 @@ async def post_cartelera(cartelera: Cartelera):
         data = get_data_from_cinema_id(cartelera.cinema_id)
         movies = data['schedules']['movies']
         movie_schedules = data['schedules']['schedules']
-        data_cartelera = imprimir_informacion_peliculas(movies, movie_schedules)
+        data_cartelera = get_data_from_movies(movies, movie_schedules)
         return data_cartelera
     else:
         print("No se proporcionó ubicación")
@@ -43,4 +43,4 @@ async def post_all_movies():
     return all_movies
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8001, reload=True)
