@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.security import HTTPBearer
 from pydantic import BaseModel
 from typing import Optional
 import uvicorn
@@ -12,9 +13,18 @@ from scraper_by_api_request import get_data_from_movies, get_data_from_cinema_id
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+Security = HTTPBearer()
+
+origins = [
+    "http://localhost:3000",
+    "http://localhost:8080",
+    "http://127.0.0.1:8000",
+    "https://cinepolisscrapper.azurewebsites.net",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite todas las origines
+    allow_origins= origins,  # Permite todas las origines
     allow_credentials=True,
     allow_methods=["*"],  # Permite todos los métodos
     allow_headers=["*"],  # Permite todos los headers
