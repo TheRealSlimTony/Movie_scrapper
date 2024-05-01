@@ -21,12 +21,16 @@ app.add_middleware(
 )
 
 class Cartelera(BaseModel):
-    location: Optional[str] = None
+    # location: Optional[str] = None
     cinema_id: Optional[int] = None
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 
 @app.post("/cartelera")
 async def post_cartelera(cartelera: Cartelera):
-    if cartelera.location:
+    if cartelera.cinema_id:
         data = get_data_from_cinema_id(cartelera.cinema_id)
         movies = data['schedules']['movies']
         movie_schedules = data['schedules']['schedules']
@@ -43,4 +47,4 @@ async def post_all_movies():
     return all_movies
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8001, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
