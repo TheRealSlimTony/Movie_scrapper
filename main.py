@@ -20,6 +20,7 @@ origins = [
     "http://localhost:8080",
     "http://127.0.0.1:8000",
     "https://cinepolisscrapper.azurewebsites.net",
+    "https://cinepolisscrapperui.azurewebsites.net",
 ]
 
 app.add_middleware(
